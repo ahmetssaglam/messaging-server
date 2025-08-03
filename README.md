@@ -46,7 +46,7 @@ init/                    # SQL initialization scripts
 ### Installation & Usage (Docker Compose)
 1. Clone the repository:
 ```sh
-git clone https://github.com/yourusername/messaging-server.git
+git clone https://github.com/ahmetssaglam/messaging-server.git
 cd messaging-server
 ```
 
