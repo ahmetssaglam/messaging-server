@@ -20,7 +20,7 @@ services:
       CRON_INTERVAL: 120
       MAX_CONCURRENT_JOBS: 5
       SERVER_GRACE_PERIOD: 30
-      WEBHOOK_URL: https://webhook.site/ddd0be6e-d6c5-4859-a90f-9f72801bb182
+      WEBHOOK_URL: https://webhook.site/c2fc1bea-5b88-4327-a029-8aacf1e35002
       REDIS_HOST: redis
       REDIS_PORT: 6379
       REDIS_DB: 0
