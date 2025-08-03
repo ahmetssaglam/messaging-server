@@ -77,7 +77,7 @@ The application uses environment variables for configuration. You can set these 
 | CRON_INTERVAL         | Cron job interval (in seconds)               | 120                                                             |
 | MAX_CONCURRENT_JOBS   | Maximum number of concurrent jobs            | 5                                                               |
 | SERVER_GRACE_PERIOD   | Grace period for server shutdown (seconds)   | 30                                                              |
-| WEBHOOK_URL           | Webhook endpoint for message delivery        | https://webhook.site/ddd0be6e-d6c5-4859-a90f-9f72801bb182        |
+| WEBHOOK_URL           | Webhook endpoint for message delivery        | https://webhook.site/c2fc1bea-5b88-4327-a029-8aacf1e35002      |
 | REDIS_HOST            | Redis host                                   | redis                                                           |
 | REDIS_PORT            | Redis port                                   | 6379                                                            |
 | REDIS_DB              | Redis database index                         | 0                                                               |
