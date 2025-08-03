@@ -1,0 +1,85 @@
+definitions:
+  models.CronRequest:
+    properties:
+      action:
+        type: string
+    type: object
+  models.Message:
+    properties:
+      content:
+        type: string
+      id:
+        type: string
+      isSent:
+        type: boolean
+      phoneNumber:
+        type: string
+    type: object
+info:
+  contact: {}
+paths:
+  /:
+    get:
+      description: Returns a welcome message including the application’s configured
+        name.
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Welcome to App!
+      summary: Welcome message
+      tags:
+      - Base
+  /api/v1/cron/control:
+    post:
+      consumes:
+      - application/json
+      description: Start or stop the cron based on the "action" field.
+      parameters:
+      - description: start or stop
+        in: body
+        name: payload
+        required: true
+        schema:
+          $ref: '#/definitions/models.CronRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Cron job started
+        "202":
+          description: Cron job will be stopped
+        "400":
+          description: Invalid request payload
+      summary: Control cron job
+      tags:
+      - Cron
+  /api/v1/list/sent-messages:
+    get:
+      description: Retrieves all messages that have been sent.
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Messages fetched successfully
+          schema:
+            items:
+              $ref: '#/definitions/models.Message'
+            type: array
+        "500":
+          description: failed to fetch messages
+      summary: List sent messages
+      tags:
+      - Messages
+  /health:
+    get:
+      description: Simple endpoint to verify the service is running.
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Healthy!
+      summary: Health check
+      tags:
+      - Base
+swagger: "2.0"

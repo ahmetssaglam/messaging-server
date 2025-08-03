@@ -1,0 +1,58 @@
+#version: "3.9"
+
+services:
+  messaging-server:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: messaging-server:latest
+    ports:
+      - "8080:8080"
+    depends_on:
+      postgres_db:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    environment:
+      APP_NAME: Messaging Server V1
+      LOG_LEVEL: DEBUG
+      MESSAGE_FETCH_LIMIT: 2
+      CRON_INTERVAL: 120
+      MAX_CONCURRENT_JOBS: 5
+      SERVER_GRACE_PERIOD: 30
+      WEBHOOK_URL: https://webhook.site/ddd0be6e-d6c5-4859-a90f-9f72801bb182
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+      REDIS_DB: 0
+      REDIS_TTL: 3600
+      POSTGRES_URI: postgres://sample_user:sample_password@postgres_db:5432/messaging_db?sslmode=disable
+
+  redis:
+    image: redis:8.0.3
+    ports:
+      - "6379:6379"
+    healthcheck:
+      test: [ "CMD", "redis-cli", "ping" ]
+      interval: 2s
+      timeout: 5s
+      retries: 5
+
+  postgres_db:
+    image: postgres:17.5
+    environment:
+      POSTGRES_USER: sample_user
+      POSTGRES_PASSWORD: sample_password
+      POSTGRES_DB: messaging_db
+    volumes:
+      - ./init/init.sql:/docker-entrypoint-initdb.d/init.sql:ro
+#      - db_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U sample_user -d messaging_db" ]
+      interval: 2s
+      timeout: 5s
+      retries: 5
+
+#volumes:
+#  db_data:

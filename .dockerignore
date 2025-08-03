@@ -1,0 +1,16 @@
+.git
+.gitignore
+
+.vscode/
+.idea/
+*.swp
+*.swo
+
+*.log
+*.tmp
+tmp/
+
+docker-compose.yml
+
+.DS_Store
+Thumbs.db
